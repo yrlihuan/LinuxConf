@@ -4,8 +4,21 @@
 
 export PATH="/opt/local/bin:/opt/local/sbin:~/work/crawlware/script/:$PATH"
 
+# used by Pentaho - platform
+export USTMPATH='~/work/platform/t-1000/script/daily_update/pentaho/'
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
+
+platform='unknown'
+unamestr=`uname`
+if [[ "$unamestr" == 'Linux' ]]; then
+  platform='linux'
+elif [[ "$unamestr" == 'FreeBSD' ]]; then
+  platform='freebsd'
+elif [[ "$unamestr" == 'Darwin' ]]; then
+  platform='mac'
+fi
 
 # don't put duplicate lines in the history. See bash(1) for more options
 # don't overwrite GNU Midnight Commander's setting of `ignorespace'.
@@ -77,9 +90,15 @@ esac
 #fi
 
 # enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
+if [[ $platform == 'mac' ]]; then
+    alias ll='ls -lG'
+    alias ls='ls -G'
+    alias la='ls -AG'
+elif [ -x /usr/bin/dircolors ]; then
     eval "`dircolors -b`"
     alias ls='ls --color=auto'
+    alias ll='ls -l --color=auto'
+    alias la='ls -a --color=auto'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
 
@@ -89,10 +108,6 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
-alias ll='ls -lG'
-alias ls='ls -G'
-alias la='ls -AG'
-alias l='ls -CFG'
 alias ..='cd ..'
 alias ....='cd ../..'
 alias vi='/usr/local/bin/vim'
