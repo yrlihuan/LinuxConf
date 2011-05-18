@@ -7,6 +7,9 @@ export PATH="/usr/local/bin:/opt/local/bin:/opt/local/sbin:~/work/crawlware/scri
 # used by Pentaho - platform
 export USTMPATH='~/work/platform/t-1000/script/daily_update/pentaho/'
 
+# set mem for jvm
+export JAVAMAXMEM="1680"
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 

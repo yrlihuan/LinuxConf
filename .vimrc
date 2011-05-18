@@ -175,7 +175,7 @@
         imap <C-k> <Up>
         imap <C-l> <Right>
         imap <C-e> <End>
-        imap <C-a> <Esc>^i
+        imap <C-a> <Esc>
 "   " }
 "   " Window Control {
         nmap - <C-W>-
