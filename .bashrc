@@ -2,7 +2,7 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-export PATH="/opt/local/bin:/opt/local/sbin:~/work/crawlware/script/:$PATH"
+export PATH="/usr/local/bin:/opt/local/bin:/opt/local/sbin:~/work/crawlware/script/:$PATH"
 
 # used by Pentaho - platform
 export USTMPATH='~/work/platform/t-1000/script/daily_update/pentaho/'
@@ -109,9 +109,9 @@ fi
 
 # some more ls aliases
 alias ..='cd ..'
-alias ....='cd ../..'
-alias vi='/usr/local/bin/vim'
-alias vim='/usr/local/bin/vim'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias vi='vim'
 alias gemdir='pushd /opt/local/lib/ruby/gems/1.8/gems'
 
 # enable programmable completion features (you don't need to enable
