@@ -177,6 +177,16 @@
         imap <C-e> <End>
         imap <C-a> <Esc>^i
 "   " }
+"   " Window Control {
+        nmap - <C-W>-
+        nmap = <C-W>+
+"   " }
+"   " Tab Control {
+        nnoremap <C-[> gt
+"   " }
+"   " NerdTree Control {
+        nnoremap nt :NERDTreeToggle<CR>
+"   " }
 " }
 
 " Autocommands {
