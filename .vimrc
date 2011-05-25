@@ -176,16 +176,39 @@
         imap <C-l> <Right>
         imap <C-e> <End>
         imap <C-a> <Esc>
+        imap <C-o> <Esc>o
 "   " }
 "   " Window Control {
         nmap - <C-W>-
         nmap = <C-W>+
 "   " }
 "   " Tab Control {
-        nnoremap <C-[> gt
+        nnoremap <C-k> gT
+        nnoremap <C-l> gt
 "   " }
 "   " NerdTree Control {
-        nnoremap nt :NERDTreeToggle<CR>
+        nnoremap <C-n> :NERDTreeToggle<CR>
+"   " }
+"   " FuzzyFinder {
+        :noremap ,ff :FufFileWithCurrentBufferDir<CR>
+        :noremap ,fb :FufBuffer<CR>
+        :noremap ,fm :FufMruFile<CR>
+        :noremap ,f; :FufMruCmd<CR>
+        :noremap ,fk :FufBookmarkFile<CR>
+        :noremap ,fa :FufBookmarkFileAdd<CR>
+        :noremap ,fr :FufBookmarkDir<CR>
+        :noremap ,fe :FufBookmarkDirAdd<CR>
+        :noremap ,fd :FufDir<CR>
+        :noremap ,ft :FufTaggedFile<CR>
+        :noremap ,fg :FufTag<CR>
+        :noremap ,f] :FufTag! <C-r>=expand('<cword>')<CR><CR>
+        :noremap ,fl :FufLine<CR>
+        :noremap ,fq :FufQuickfix<CR>
+        :noremap ,fp :FufChangeList<CR>
+        :noremap ,fj :FufJumpList<CR>
+        :noremap ,fi :FufEditDataFile<CR>
+        :noremap ,fc :FufRenewCache<CR>
+        :noremap ,fh :FufBufferTag<CR>
 "   " }
 " }
 
