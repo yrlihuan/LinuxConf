@@ -3,18 +3,22 @@
 # for examples
 
 # used by Pentaho - platform
-export USTMPATH='~/work/platform/t-1000/script/daily_update/pentaho/'
+export USTMPATH="~/work/platform/t-1000/script/daily_update/pentaho/"
 
 # set mem for jvm
 export JAVAMAXMEM="1024"
-export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home
+export JAVA_HOME="/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home"
 
 # hadoop and hive
 export HADOOP_HOME="/usr/local/hadoop-0.20.2"
 export HIVE_HOME="/usr/local/hive-0.7.0"
 
+# EMR tools
+export EMR_TOOLS="/Users/eric/emr/elastic-mapreduce-ruby"
+export EMR_PRIVATE_KEY="/Users/eric/.ssh/HiveKey.pem"
+
 # bin search path
-export PATH="$HADOOP_HOME/bin:$HIVE_HOME/bin:/usr/local/bin:/opt/local/bin:/opt/local/sbin:~/work/crawlware/script/:$PATH"
+export PATH="$EMR_TOOLS:$HADOOP_HOME/bin:$HIVE_HOME/bin:/usr/local/bin:/opt/local/bin:/opt/local/sbin:~/work/crawlware/script/:$PATH"
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
@@ -124,6 +128,7 @@ alias vi='vim'
 alias gemdir='pushd /opt/local/lib/ruby/gems/1.8/gems'
 alias pan='/usr/local/pentaho/pan.sh'
 alias kitchen='/usr/local/pentaho/kitchen.sh'
+alias pylib='pushd /opt/local/Library/Frameworks/Python.framework/Versions/2.7'
 alias rm='rmtrash'
 
 # enable programmable completion features (you don't need to enable

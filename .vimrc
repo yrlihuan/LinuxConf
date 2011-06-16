@@ -169,6 +169,7 @@
 " }
 
 " Mappings {
+    nnoremap <M-n> :tabnew<CR>
 "   " Insert Moves {
         imap <C-h> <Left>
         imap <C-j> <Down>
@@ -260,4 +261,9 @@ if has("gui_running")
         map <F12> <ESC>:set guifont=Consolas:h20<CR>
     " }
 endif
+" }
+
+" Super Tab {
+  let g:SuperTabRetainCompletionType=2
+  let g:SuperTabDefaultCompletionType="<C-X><C-O>"
 " }
