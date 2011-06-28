@@ -262,8 +262,3 @@ if has("gui_running")
     " }
 endif
 " }
-
-" Super Tab {
-  let g:SuperTabRetainCompletionType=2
-  let g:SuperTabDefaultCompletionType="<C-X><C-O>"
-" }

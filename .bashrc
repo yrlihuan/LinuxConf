@@ -15,10 +15,11 @@ export HIVE_HOME="/usr/local/hive-0.7.0"
 
 # EMR tools
 export EMR_TOOLS="/Users/eric/emr/elastic-mapreduce-ruby"
+export EC2_TOOLS="/Users/eric/emr/ec2-api-tools-1.4.3.0"
 export EMR_PRIVATE_KEY="/Users/eric/.ssh/HiveKey.pem"
 
 # bin search path
-export PATH="$EMR_TOOLS:$HADOOP_HOME/bin:$HIVE_HOME/bin:/usr/local/bin:/opt/local/bin:/opt/local/sbin:~/work/crawlware/script/:$PATH"
+export PATH="$EMR_TOOLS:$EC2_TOOLS/bin:$HADOOP_HOME/bin:$HIVE_HOME/bin:/usr/local/bin:/opt/local/bin:/opt/local/sbin:~/work/crawlware/script/:$PATH"
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
@@ -78,7 +79,7 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    PS1="${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] \[\033[0;36m\]\`ruby -e \"print (%x{git branch 2> /dev/null}.grep(/^\*/).first || '').gsub(/^\* (.+)$/, '(\1) ')\"\`\[\033[37m\]$\[\033[00m\] "
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
