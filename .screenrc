@@ -9,6 +9,8 @@ startup_message off   # default: on
 
 autodetach on      # default: on
 
+vbell off
+
 # Set messages timeout to one second:
 msgwait 1
 
