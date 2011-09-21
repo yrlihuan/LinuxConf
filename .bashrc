@@ -2,11 +2,16 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+# config git
+source ~/.git-completion.bash
+
 # set mem for jvm
 export JAVAMAXMEM="768"
 
 # bin search path
 export PATH="/usr/local/bin:/opt/local/bin:/opt/local/sbin:~/work/crawlware/script/:$PATH"
+
+export EDITOR="vim"
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
