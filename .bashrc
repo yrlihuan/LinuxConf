@@ -9,7 +9,7 @@ source ~/.git-completion.bash
 export JAVAMAXMEM="768"
 
 # bin search path
-export PATH="/usr/local/bin:/opt/local/bin:/opt/local/sbin:~/work/crawlware/script/:$PATH"
+export PATH="/usr/local/bin:/opt/local/bin:/opt/local/sbin:$PATH"
 
 export EDITOR="vim"
 
@@ -119,6 +119,7 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias vi='vim'
 alias trash='mv -t ~/.local/share/Trash/files --backup=t'
+alias gemdir='pushd /var/lib/gems/1.8/gems'
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
