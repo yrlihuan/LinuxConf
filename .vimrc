@@ -170,6 +170,7 @@
 " }
 
 " Mappings {
+    set pastetoggle=<C-i>
     nnoremap <M-n> :tabnew<CR>
 "   " Insert Moves {
         imap <C-h> <Left>

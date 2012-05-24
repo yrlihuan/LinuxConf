@@ -10,6 +10,7 @@ export JAVAMAXMEM="768"
 
 # bin search path
 export PATH="/usr/local/bin:/opt/local/bin:/opt/local/sbin:$PATH"
+export PATH="$PATH:/usr/local/android-sdk-macosx/platform-tools"
 
 export EDITOR="vim"
 
@@ -120,6 +121,7 @@ alias ....='cd ../../..'
 alias vi='vim'
 alias trash='mv -t ~/.local/share/Trash/files --backup=t'
 alias gemdir='pushd /var/lib/gems/1.8/gems'
+alias hgrep='history | grep'
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
