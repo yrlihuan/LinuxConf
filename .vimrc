@@ -40,7 +40,6 @@
     " set hidden " you can change buffers without saving
     " (XXX: #VIM/tpope warns the line below could break things)
     set iskeyword+=_,$,@,%,# " none of these are word dividers
-    set mouse=a " use mouse everywhere
     set noerrorbells " don't make noise
     set whichwrap=b,s,h,l,<,>,~,[,] " everything wraps
     "             | | | | | | | | |
@@ -65,6 +64,8 @@
     " set cursorline " highlight current line
     set incsearch " BUT do highlight as you type you
                    " search phrase
+    set mouse-=a " Prevent entering visual mode when selecting
+                 " using mouse
     set laststatus=2 " always show the status line
     set lazyredraw " do not redraw while running macros
     set linespace=0 " don't insert any extra pixel lines
@@ -169,6 +170,7 @@
 " }
 
 " Mappings {
+    set pastetoggle=<C-i>
     nnoremap <M-n> :tabnew<CR>
 "   " Insert Moves {
         imap <C-h> <Left>
