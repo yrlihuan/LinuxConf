@@ -251,6 +251,7 @@ if has("gui_running")
         "              +  use GUI tabs, not console style tabs
         set lines=55 " perfect size for me
         set mousehide " hide the mouse cursor when typing
+        set mouse=
     " }
 
     " Font Switching Binds {
