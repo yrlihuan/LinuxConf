@@ -17,6 +17,12 @@ export EDITOR="vim"
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+# setup qstk env
+source ~/workspace/qstk/config.sh
+
+# setup terminal encoding
+export LC_ALL="en_US.UTF-8"
+
 platform='unknown'
 unamestr=`uname`
 if [[ "$unamestr" == 'Linux' ]]; then
