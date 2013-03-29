@@ -12,6 +12,9 @@ export JAVAMAXMEM="768"
 export PATH="/usr/local/bin:/opt/local/bin:/opt/local/sbin:$PATH"
 export PATH="$PATH:/usr/local/android-sdk-macosx/platform-tools"
 
+# lib search path
+export LD_LIBRARY_PATH="/home/huan/workspace/pyctp/orignal/ctp/api/trade/linux64/lib:$LD_LIBRARY_PATH"
+
 export EDITOR="vim"
 
 # If not running interactively, don't do anything
@@ -19,6 +22,9 @@ export EDITOR="vim"
 
 # setup qstk env
 source ~/workspace/qstk/config.sh
+
+# setup pyctp
+source ~/workspace/pyctp/config.sh
 
 # setup terminal encoding
 export LC_ALL="en_US.UTF-8"
