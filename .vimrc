@@ -29,6 +29,7 @@
     "             |+-- :write updates alternative file name
     "             +-- :read updates alternative file name
     syntax on " syntax highlighting on
+    set fencs=utf-8,gb18030
 " }
 
 " General {

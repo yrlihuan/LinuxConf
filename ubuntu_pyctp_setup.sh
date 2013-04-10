@@ -12,6 +12,7 @@ sudo apt-get install -y git-core
 sudo apt-get install -y ruby1.8
 sudo apt-get install -y rubygems1.8
 sudo apt-get install -y vim
+sudo apt-get install -y screen
 
 # ----------------------------------------------
 # setup ssh crendentials
@@ -48,6 +49,7 @@ mkdir $WORKSPACE
 git clone git@github.com:$USER_GITHUB/LinuxConf.git $HOME/LinuxConf
 git clone git@github.com:$USER_GITHUB/pyctp.git $WORKSPACE/pyctp
 git clone git@github.com:$USER_GITHUB/Hermes.git $WORKSPACE/Hermes
+git clone git@github.com:$USER_GITHUB/Scripts.git $WORKSPACE/scripts
 
 
 # ----------------------------------------------
