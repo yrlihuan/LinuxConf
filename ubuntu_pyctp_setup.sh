@@ -8,14 +8,23 @@
 # install development tools (git, ruby, etc)
 # ----------------------------------------------
 
+# to run "sudo" without prompting password,
+# modify /etc/sudoers, add the following line
+# %sudo ALL=(ALL) NOPASSWD: NOPASSWD: ALL
+
 sudo apt-get install -y git-core
 sudo apt-get install -y ruby
 sudo apt-get install -y rubygems
 sudo apt-get install -y vim
 sudo apt-get install -y screen
+sudo apt-get install -y host
+sudo apt-get install -y sysbench
+
+git config --global user.email "yrlihuan@gmail.com"
+git config --global user.name "Huan Li"
 
 # ----------------------------------------------
-# setup ssh crendentials
+# setup ssh
 # ----------------------------------------------
 
 SSH_HOME=$HOME/.ssh
@@ -62,4 +71,13 @@ ln -s $HOME/LinuxConf/.screenrc $HOME/.screenrc
 ln -s $HOME/LinuxConf/.bashrc $HOME/.bashrc
 ln -s $HOME/LinuxConf/.bashrc $HOME/.profile
 ln -s $HOME/LinuxConf/.git-completion.bash $HOME/.git-completion.bash
+
+# ---------------------------------------------
+# Securites
+# ---------------------------------------------
+
+# disable ssh access
+$WORKSPACE/scripts/restrict_ssh_access.rb -b
+(crontab -l ; echo "*/3 * * * * $WORKSPACE/scripts/restrict_ssh_access.rb") | crontab -
+(crontab -l ; echo "@reboot $WORKSPACE/scripts/restrict_ssh_access.rb -b") | crontab -
 
