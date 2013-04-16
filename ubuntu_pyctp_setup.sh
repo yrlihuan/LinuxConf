@@ -9,8 +9,8 @@
 # ----------------------------------------------
 
 sudo apt-get install -y git-core
-sudo apt-get install -y ruby1.8
-sudo apt-get install -y rubygems1.8
+sudo apt-get install -y ruby
+sudo apt-get install -y rubygems
 sudo apt-get install -y vim
 sudo apt-get install -y screen
 

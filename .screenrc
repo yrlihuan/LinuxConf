@@ -37,4 +37,4 @@ bindkey -k k9 next
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= #
 termcapinfo xterm|xterms|xs|rxvt ti@:te@
 
-defscrollback 2000
+defscrollback 50000
