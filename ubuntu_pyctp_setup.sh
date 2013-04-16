@@ -77,7 +77,5 @@ ln -s $HOME/LinuxConf/.git-completion.bash $HOME/.git-completion.bash
 # ---------------------------------------------
 
 # disable ssh access
-$WORKSPACE/scripts/restrict_ssh_access.rb -b
-(crontab -l ; echo "*/3 * * * * $WORKSPACE/scripts/restrict_ssh_access.rb") | crontab -
-(crontab -l ; echo "@reboot $WORKSPACE/scripts/restrict_ssh_access.rb -b") | crontab -
+(crontab -l ; echo "*/5 * * * * $WORKSPACE/scripts/restrict_ssh_access.rb") | crontab -
 
