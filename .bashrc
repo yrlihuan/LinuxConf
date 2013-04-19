@@ -15,6 +15,7 @@ export PATH="$PATH:/Applications/Adobe/FlexSDK2/bin"
 
 # lib search path
 export LD_LIBRARY_PATH="/home/huan/workspace/pyctp/orignal/ctp/api/trade/linux64/lib:$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH="/home/huan/workspace/pyctp/orignal/ctp_sse/api/trade/linux64/lib:$LD_LIBRARY_PATH"
 
 export EDITOR="vim"
 
