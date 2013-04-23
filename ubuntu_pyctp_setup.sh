@@ -21,6 +21,10 @@ sudo apt-get install -y vim
 sudo apt-get install -y screen
 sudo apt-get install -y host
 sudo apt-get install -y sysbench
+sudo apt-get install -y ntp
+
+sudo apt-get install -y python-yaml
+sudo gem install json
 
 git config --global user.email "yrlihuan@gmail.com"
 git config --global user.name "Huan Li"
