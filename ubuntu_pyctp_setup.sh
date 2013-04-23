@@ -71,6 +71,7 @@ git clone git@github.com:$USER_GITHUB/pyctp.git $WORKSPACE/pyctp
 git clone git@github.com:$USER_GITHUB/Hermes.git $WORKSPACE/Hermes
 git clone git@github.com:$USER_GITHUB/Scripts.git $WORKSPACE/scripts
 
+git clone eagle.hvps.tk:/home/git/Ithaca.git $WORKSPACE/Ithaca
 
 # ----------------------------------------------
 # setup working env
