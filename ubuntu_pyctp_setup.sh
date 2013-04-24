@@ -80,6 +80,7 @@ git clone eagle.hvps.tk:/home/git/Ithaca.git $WORKSPACE/Ithaca
 ln -s $HOME/LinuxConf/.vim $HOME/.vim
 ln -s $HOME/LinuxConf/.vimrc $HOME/.vimrc
 ln -s $HOME/LinuxConf/.screenrc $HOME/.screenrc
+ln -s $HOME/LinuxConf/.env $HOME/.env
 ln -s $HOME/LinuxConf/.bashrc $HOME/.bashrc
 ln -s $HOME/LinuxConf/.bashrc $HOME/.profile
 ln -s $HOME/LinuxConf/.git-completion.bash $HOME/.git-completion.bash
@@ -90,4 +91,5 @@ ln -s $HOME/LinuxConf/.git-completion.bash $HOME/.git-completion.bash
 
 # disable ssh access
 (crontab -l ; echo "*/5 * * * * $WORKSPACE/scripts/restrict_ssh_access.rb") | crontab -
+(crontab -l ; echo "* * * * * . ~/.env; ~/workspace/Ithaca/tools/daemon/daemon.py") | crontab -
 
