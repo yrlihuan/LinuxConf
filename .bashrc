@@ -5,31 +5,14 @@
 # config git
 source ~/.git-completion.bash
 
-# set mem for jvm
-export JAVAMAXMEM="768"
-
-# bin search path
-export PATH="/usr/local/bin:/opt/local/bin:/opt/local/sbin:$PATH"
-export PATH="$PATH:/usr/local/android-sdk-macosx/platform-tools"
-export PATH="$PATH:/Applications/Adobe/FlexSDK2/bin"
-
-# lib search path
-export LD_LIBRARY_PATH="/home/huan/workspace/pyctp/orignal/ctp/api/trade/linux64/lib:$LD_LIBRARY_PATH"
-export LD_LIBRARY_PATH="/home/huan/workspace/pyctp/orignal/ctp_sse/api/trade/linux64/lib:$LD_LIBRARY_PATH"
-
-export EDITOR="vim"
-
-# If not running interactively, don't do anything
-[ -z "$PS1" ] && return
+# read env
+source ~/.env
 
 # setup qstk env
 source ~/workspace/qstk/config.sh
 
-# setup pyctp
-source ~/workspace/pyctp/config.sh
-
-# setup terminal encoding
-export LC_ALL="en_US.UTF-8"
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
 
 platform='unknown'
 unamestr=`uname`
