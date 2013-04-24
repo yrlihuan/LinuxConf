@@ -12,6 +12,8 @@
 # modify /etc/sudoers, add the following line
 # %sudo ALL=(ALL) NOPASSWD: NOPASSWD: ALL
 
+sudo apt-get update
+
 sudo apt-get install -y git-core
 sudo apt-get install -y ruby
 sudo apt-get install -y rubygems
@@ -19,6 +21,10 @@ sudo apt-get install -y vim
 sudo apt-get install -y screen
 sudo apt-get install -y host
 sudo apt-get install -y sysbench
+sudo apt-get install -y ntp
+
+sudo apt-get install -y python-yaml
+sudo gem install json
 
 git config --global user.email "yrlihuan@gmail.com"
 git config --global user.name "Huan Li"
@@ -28,6 +34,8 @@ git config --global user.name "Huan Li"
 # ----------------------------------------------
 
 SSH_HOME=$HOME/.ssh
+
+mkdir $SSH_HOME
 
 # add authorized keys (me622)
 echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsyqvf+IQr8NvUFWPutNN6PMftGEqAWJAtBbVaLszgmuLPUkItfX9OKGveaFoTISxwoAKSQ5Qy5xfDnTu23PIkoSnu6JjPcdT1qPdkLMNw3EImROLPRuJ+SpzQpvpAIbfVA1YUDlBsVnezFqNmufGi3GQdOFjciOW4N5nXWpK7dBgtEFIUlpfIiWJDwYWvrUPLnAcX1zJ6fp9t3xHU1anRM1esy9cLEMuf0qFUiA+uoHQ1Js1nbMABfl3nyYWyTIA0E9+PaOESuVFLxbbzxqXczsEe7rZ8M6EDk1ElGtLrqhFMDL1Y+OkKe779z92v0U91aFgXGHJX4D5xxUS29ZFV" >> $SSH_HOME/authorized_keys
@@ -42,8 +50,11 @@ echo "1. Run ssh-keygen"
 echo "2. Login your github account. Add the generated public key to auto authorized list"
 echo "3. When finished, press 'y'"
 
-FINISHED=read
-if [ $FINISHED != 'y' ]; then
+read -p "when finished, type 'y' and enter: " finished
+if [ "$finished" == 'y' ]; then
+  echo "continue..."
+else
+  echo "user canceled"
   exit
 fi
 
