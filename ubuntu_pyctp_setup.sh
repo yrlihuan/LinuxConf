@@ -24,6 +24,7 @@ sudo apt-get install -y sysbench
 sudo apt-get install -y ntp
 
 sudo apt-get install -y python-yaml
+sudo apt-get install -y python-numpy
 sudo gem install json
 
 git config --global user.email "yrlihuan@gmail.com"
