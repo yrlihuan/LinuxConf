@@ -22,9 +22,11 @@ sudo apt-get install -y screen
 sudo apt-get install -y host
 sudo apt-get install -y sysbench
 sudo apt-get install -y ntp
+sudo apt-get install -y wput
 
 sudo apt-get install -y python-yaml
 sudo apt-get install -y python-numpy
+sudo apt-get install -y python-dev
 sudo gem install json
 
 git config --global user.email "yrlihuan@gmail.com"
@@ -69,9 +71,9 @@ WORKSPACE=$HOME/workspace
 mkdir $WORKSPACE
 git clone git@github.com:$USER_GITHUB/LinuxConf.git $HOME/LinuxConf
 git clone git@github.com:$USER_GITHUB/pyctp.git $WORKSPACE/pyctp
-git clone git@github.com:$USER_GITHUB/Hermes.git $WORKSPACE/Hermes
 git clone git@github.com:$USER_GITHUB/Scripts.git $WORKSPACE/scripts
 
+git clone eagle.hvps.tk:/home/git/Hermes.git $WORKSPACE/Hermes
 git clone eagle.hvps.tk:/home/git/Ithaca.git $WORKSPACE/Ithaca
 git clone eagle.hvps.tk:/home/git/qstk.git $WORKSPACE/qstk
 
@@ -92,6 +94,14 @@ ln -s $HOME/LinuxConf/.git-completion.bash $HOME/.git-completion.bash
 # ---------------------------------------------
 
 # disable ssh access
-(crontab -l ; echo "*/5 * * * * $WORKSPACE/scripts/restrict_ssh_access.rb") | crontab -
-(crontab -l ; echo "* * * * * . ~/.env; ~/workspace/Ithaca/tools/daemon/daemon.py") | crontab -
+(crontab -l ; echo "*/5 * * * * $WORKSPACE/scripts/restrict_ssh_access.rb > /dev/null") | crontab -
+(crontab -l ; echo "* * * * * . ~/.env; ~/workspace/Ithaca/tools/daemon/daemon.py > /dev/null") | crontab -
+
+# ---------------------------------------------
+# Other Settings
+# ---------------------------------------------
+
+
+
+
 

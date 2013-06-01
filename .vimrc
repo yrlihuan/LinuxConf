@@ -30,6 +30,9 @@
     "             +-- :read updates alternative file name
     syntax on " syntax highlighting on
     set fencs=utf-8,gb18030
+
+    " this enable vim to edit crontab file on mac
+    au BufEnter /private/tmp/crontab.* setl backupcopy=yes
 " }
 
 " General {
