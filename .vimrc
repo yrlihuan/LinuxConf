@@ -9,6 +9,7 @@
 " }
 
 " Basics {
+    set updatetime=250
     set nocompatible " explicitly get out of vi-compatible mode
     set noexrc " don't use local version of .(g)vimrc, .exrc
     set background=dark " we plan to use a dark background
