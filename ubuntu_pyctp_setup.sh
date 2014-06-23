@@ -23,10 +23,28 @@ sudo apt-get install -y host
 sudo apt-get install -y sysbench
 sudo apt-get install -y ntp
 sudo apt-get install -y wput
+sudo apt-get install -y memcached
 
 sudo apt-get install -y python-yaml
 sudo apt-get install -y python-numpy
+sudo apt-get install -y python-scipy
 sudo apt-get install -y python-dev
+sudo apt-get install -y python-setuptools
+sudo apt-get install -y python-psutil
+sudo apt-get install -y python-flask
+sudo apt-get install -y python-memcache
+
+sudo apt-get install -y libboost-all-dev
+sudo apt-get install -y libspatialindex-dev
+
+sudo easy_install redis
+sudo easy_install hiredis
+sudo easy_install yappi
+sudo easy_install Rtree
+sudo easy_install BeautifulSoup4
+sudo easy_install twisted
+sudo easy_install scikit-learn
+
 sudo gem install json
 
 git config --global user.email "yrlihuan@gmail.com"
@@ -89,13 +107,19 @@ ln -s $HOME/LinuxConf/.bashrc $HOME/.bashrc
 ln -s $HOME/LinuxConf/.bashrc $HOME/.profile
 ln -s $HOME/LinuxConf/.git-completion.bash $HOME/.git-completion.bash
 
+# ----------------------------------------------
+# setup locales
+# ----------------------------------------------
+
+sudo localedef -v -c -i en_US -f UTF-8 en_US.UTF-8
+
 # ---------------------------------------------
 # Securites
 # ---------------------------------------------
 
 # disable ssh access
-(crontab -l ; echo "*/5 * * * * $WORKSPACE/scripts/restrict_ssh_access.rb > /dev/null") | crontab -
-(crontab -l ; echo "* * * * * . ~/.env; ~/workspace/Ithaca/tools/daemon/daemon.py > /dev/null") | crontab -
+# (crontab -l ; echo "*/5 * * * * $WORKSPACE/scripts/restrict_ssh_access.rb > /dev/null") | crontab -
+# (crontab -l ; echo "* * * * * . ~/.env; ~/workspace/Ithaca/tools/daemon/daemon.py > /dev/null") | crontab -
 
 # ---------------------------------------------
 # Other Settings

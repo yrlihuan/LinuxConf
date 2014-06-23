@@ -172,6 +172,14 @@
             let tlist_vb_settings = 'asp;f:function;c:class' 
         " }
     " }
+
+    " FuzzyFinder Settings {
+      let g:fuf_coveragefile_globPatterns=['**/*.rb', '**/*.py']
+    " }
+
+    " ctrlp {
+      set runtimepath^=~/.vim/bundle/ctrlp.vim
+    " }
 " }
 
 " Mappings {
@@ -198,7 +206,8 @@
         nnoremap <C-n> :NERDTreeToggle<CR>
 "   " }
 "   " FuzzyFinder {
-        :noremap ,ff :FufFileWithCurrentBufferDir<CR>
+        :noremap ,ff :FufFile<CR>
+        :noremap ,fz :FufFileWithCurrentBufferDir<CR>
         :noremap ,fb :FufBuffer<CR>
         :noremap ,fm :FufMruFile<CR>
         :noremap ,f; :FufMruCmd<CR>
@@ -215,7 +224,8 @@
         :noremap ,fp :FufChangeList<CR>
         :noremap ,fj :FufJumpList<CR>
         :noremap ,fi :FufEditDataFile<CR>
-        :noremap ,fc :FufRenewCache<CR>
+"        :noremap ,fc :FufRenewCache<CR>
+        :noremap ,fc :FufCoverageFile<CR>
         :noremap ,fh :FufBufferTag<CR>
 "   " }
 " }

@@ -10,6 +10,9 @@ source ~/.env
 
 # setup qstk env
 source ~/workspace/qstk/config.sh
+source /Users/huan/.rvm/scripts/rvm
+
+export PATH=$PATH:~/workspace/sources/depot_tools
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
@@ -132,3 +135,5 @@ alias hgrep='history | grep'
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
