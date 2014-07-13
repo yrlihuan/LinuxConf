@@ -25,25 +25,28 @@ sudo apt-get install -y ntp
 sudo apt-get install -y wput
 sudo apt-get install -y memcached
 
-sudo apt-get install -y python-yaml
-sudo apt-get install -y python-numpy
-sudo apt-get install -y python-scipy
-sudo apt-get install -y python-dev
-sudo apt-get install -y python-setuptools
-sudo apt-get install -y python-psutil
-sudo apt-get install -y python-flask
-sudo apt-get install -y python-memcache
-
 sudo apt-get install -y libboost-all-dev
 sudo apt-get install -y libspatialindex-dev
 
-sudo easy_install redis
-sudo easy_install hiredis
-sudo easy_install yappi
-sudo easy_install Rtree
-sudo easy_install BeautifulSoup4
-sudo easy_install twisted
-sudo easy_install scikit-learn
+sudo easy_install pip
+sudo pip install virtualenvwrapper
+mkdir ~/.virtualenv
+export WORKON_HOME=~/.virtualenv
+mkvirtualenv I
+pip install setuptools
+pip install psutil
+pip install PyYAML
+pip install numpy
+pip install scipy
+pip install pandas
+pip install redis
+pip install hiredis
+pip install flask
+pip install python-memcached
+pip install Rtree
+pip install BeautifulSoup4
+pip install twisted
+pip install scikit-learn
 
 sudo gem install json
 
@@ -124,8 +127,5 @@ sudo localedef -v -c -i en_US -f UTF-8 en_US.UTF-8
 # ---------------------------------------------
 # Other Settings
 # ---------------------------------------------
-
-
-
 
 

@@ -12,6 +12,9 @@ source ~/.env
 source ~/workspace/qstk/config.sh
 source /Users/huan/.rvm/scripts/rvm
 
+export WORKON_HOME=~/.virtualenv
+source /usr/local/bin/virtualenvwrapper.sh
+
 export PATH=$PATH:~/workspace/sources/depot_tools
 
 # If not running interactively, don't do anything
