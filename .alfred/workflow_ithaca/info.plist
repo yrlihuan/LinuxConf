@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>tk.hvps.tomcat</string>
+	<key>connections</key>
+	<dict>
+		<key>icon</key>
+		<array/>
+		<key>74764AE0-5D45-4991-A226-FDB02E5596D0</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>25396D62-06DF-43A5-962A-4F201B277FED</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+		<key>A450EF4D-6633-413E-8849-E79737E2E113</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>55068D56-1A7B-44C3-90EF-D7E34C7F7B97</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+		<key>google</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>769B707F-2503-48C6-9E6E-B688E7672AD4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>yrlihuan</string>
+	<key>description</key>
+	<string>View Ithaca Status</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Ithaca Status</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>escaping</key>
+				<integer>4</integer>
+				<key>keyword</key>
+				<string>ithaca</string>
+				<key>runningsubtext</key>
+				<string>running queries</string>
+				<key>script</key>
+				<string>import os
+import alfred
+import logging
+import json
+
+s = os.popen('curl --socks5 localhost:1080 -s http://tomcat:5000/api/realtime_status').read()
+s2 = os.popen('curl --socks5 localhost:1080 -s http://tomcat:5000/api/system').read()
+
+feedback = alfred.Feedback()
+if not s or not s2:
+  feedback.addItem(title='Cannot query Ithaca status', subtitle='please check proxy settings', valid=False)
+else:
+  obj = json.loads(s)
+  daily_return = obj['daily_return']
+  assets = obj['assets']
+
+  obj2 = json.loads(s2)
+  cpu = obj2['cpu']['percent']
+  send_rate = obj2['network']['send_rate']
+  recv_rate = obj2['network']['recv_rate']
+
+  title = 'daily return: %.2f%%. total assets: %.0f' % (daily_return * 100, assets)
+  subtitle = 'cpu: %.1f%%. send: %.1fKB/s. recv: %.1fKB/s' % (cpu, send_rate / 1000.0, recv_rate / 1000.0)
+  feedback.addItem(title=title, subtitle=subtitle, valid=False)
+
+feedback.output()</string>
+				<key>title</key>
+				<string>query for account info</string>
+				<key>type</key>
+				<integer>3</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>icon</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>escaping</key>
+				<integer>8</integer>
+				<key>keyword</key>
+				<string>proxy</string>
+				<key>runningsubtext</key>
+				<string>checking status</string>
+				<key>script</key>
+				<string>import os
+import alfred
+import logging
+
+opened_1080 = os.popen('ps aux | grep ssh.*1080 | grep -v grep').read()
+opened_1081 = os.popen('ps aux | grep ssh.*1081 | grep -v grep').read()
+
+feedback = alfred.Feedback()
+
+configs = []
+if opened_1080 == '':
+  configs.append(('tomcat', '1080', 'ssh -D 1080 -N -f -p 8022 tomcat.hvps.tk'))
+  configs.append(('thunder', '1080', 'ssh -D 1080 -N -f -p 8022 thunder.hvps.tk'))
+
+if opened_1081 == '':
+  configs.append(('eagle', '1081', 'ssh -D 1081 -N -f eagle.hvps.tk'))
+
+if configs:
+  for name, port, cmd in configs:
+    title = 'start proxy for %s on %s' % (name, port)
+    subtitle = 'cmd: %s' % cmd
+    feedback.addItem(title=title, subtitle=subtitle, valid=True, arg=cmd)
+else:
+  feedback.addItem(title="all ports are listening", subtitle='', valid=False)
+
+feedback.output()
+  </string>
+				<key>title</key>
+				<string>start socks proxies</string>
+				<key>type</key>
+				<integer>3</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>A450EF4D-6633-413E-8849-E79737E2E113</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>8</integer>
+				<key>script</key>
+				<string>import subprocess
+from subprocess import PIPE
+
+cmd = '{query}'
+subprocess.call(cmd, stdin=PIPE, stdout=PIPE, stderr=PIPE, shell=True)
+</string>
+				<key>type</key>
+				<integer>3</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>55068D56-1A7B-44C3-90EF-D7E34C7F7B97</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>lock</string>
+				<key>text</key>
+				<string>put mac to lock &amp; display off state</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>74764AE0-5D45-4991-A226-FDB02E5596D0</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>script</key>
+				<string>pmset displaysleepnow</string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>25396D62-06DF-43A5-962A-4F201B277FED</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string>org.mozilla.firefox</string>
+				<key>plusspaces</key>
+				<true/>
+				<key>url</key>
+				<string>https://www.google.com/?#q={query}</string>
+				<key>utf8</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>769B707F-2503-48C6-9E6E-B688E7672AD4</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>8</integer>
+				<key>keyword</key>
+				<string>g</string>
+				<key>script</key>
+				<string>import os
+import alfred
+
+feedback = alfred.Feedback()
+
+query = "{query}"
+feedback.addItem(title="search for \"%s\"" % query,
+                 subtitle="",
+                 arg="%s" % query,
+			    icon="google.png",
+			     is_valid=True)
+
+feedback.output()</string>
+				<key>title</key>
+				<string>Search in Firefox</string>
+				<key>type</key>
+				<integer>3</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>google</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string></string>
+	<key>uidata</key>
+	<dict>
+		<key>icon</key>
+		<dict>
+			<key>ypos</key>
+			<real>10</real>
+		</dict>
+		<key>25396D62-06DF-43A5-962A-4F201B277FED</key>
+		<dict>
+			<key>ypos</key>
+			<real>290</real>
+		</dict>
+		<key>55068D56-1A7B-44C3-90EF-D7E34C7F7B97</key>
+		<dict>
+			<key>ypos</key>
+			<real>150</real>
+		</dict>
+		<key>74764AE0-5D45-4991-A226-FDB02E5596D0</key>
+		<dict>
+			<key>ypos</key>
+			<real>290</real>
+		</dict>
+		<key>769B707F-2503-48C6-9E6E-B688E7672AD4</key>
+		<dict>
+			<key>ypos</key>
+			<real>430</real>
+		</dict>
+		<key>A450EF4D-6633-413E-8849-E79737E2E113</key>
+		<dict>
+			<key>ypos</key>
+			<real>150</real>
+		</dict>
+		<key>google</key>
+		<dict>
+			<key>ypos</key>
+			<real>430</real>
+		</dict>
+	</dict>
+	<key>webaddress</key>
+	<string></string>
+</dict>
+</plist>
