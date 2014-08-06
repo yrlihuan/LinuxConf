@@ -16,6 +16,7 @@ export WORKON_HOME=~/.virtualenv
 source /usr/local/bin/virtualenvwrapper.sh
 
 export PATH=$PATH:~/workspace/sources/depot_tools
+export PATH=/Users/huan/workspace/sources/go/bin:$PATH
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return

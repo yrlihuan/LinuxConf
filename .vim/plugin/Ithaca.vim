@@ -528,7 +528,16 @@ function! s:UpdateFutureContent()
   if d1['Volume'] == d2['Volume']
     let traded = d2['LastPrice']
   else
-    let traded = (d2['Turnover'] - d1['Turnover']) / (d2['Volume'] - d1['Volume']) / 300.0
+    let buf = bufname('%')
+    if match(buf, 'ru')
+      let mult = 10.0
+    elseif match(buf, 'cu')
+      let mult = 10.0
+    else
+      let mult = 300.0
+    endif
+
+    let traded = (d2['Turnover'] - d1['Turnover']) / (d2['Volume'] - d1['Volume']) / mult
   endif
 
   call setline(current_line, printf('    成交 %5.2f %d', traded, volume_delta))

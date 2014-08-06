@@ -174,7 +174,7 @@
     " }
 
     " FuzzyFinder Settings {
-      let g:fuf_coveragefile_globPatterns=['**/*.rb', '**/*.py']
+      let g:fuf_coveragefile_globPatterns=['**/*.rb', '**/*.py', '**/*.h', '**/*.cpp', '**/*.cc', '**/*.c', '**/*.hpp']
     " }
 
     " ctrlp {

@@ -28,7 +28,8 @@ sudo apt-get install -y memcached
 sudo apt-get install -y libboost-all-dev
 sudo apt-get install -y libspatialindex-dev
 
-sudo easy_install pip
+sudo apt-get install -y python-pip
+
 sudo pip install virtualenvwrapper
 mkdir ~/.virtualenv
 export WORKON_HOME=~/.virtualenv
