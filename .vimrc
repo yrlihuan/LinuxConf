@@ -206,6 +206,7 @@
         nnoremap <C-n> :NERDTreeToggle<CR>
 "   " }
 "   " FuzzyFinder {
+        nnoremap ,tt :tabf %<CR>:FufFileWithCurrentBufferDir<CR>
         :noremap ,ff :FufFile<CR>
         :noremap ,fz :FufFileWithCurrentBufferDir<CR>
         :noremap ,fb :FufBuffer<CR>
