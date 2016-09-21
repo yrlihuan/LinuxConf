@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+FILE_TYPE=$1
+PATTERN=$2
+
+if [ "$FILE_TYPE" = "cc" ]; then
+  files=$( find . \( -name "*.h" -o -name "*.cc" -o -name "*.c" -o -name "*.cpp" -o -name "*.hpp" \) )
+else
+  echo "Unknown file category: $FILE_TYPE!"
+  exit
+fi
+
+grep $PATTERN $files
