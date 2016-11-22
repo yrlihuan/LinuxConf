@@ -5,6 +5,8 @@ PATTERN=$2
 
 if [ "$FILE_TYPE" = "cc" ]; then
   files=$( find . \( -name "*.h" -o -name "*.cc" -o -name "*.c" -o -name "*.cpp" -o -name "*.hpp" \) )
+elif [ "$FILE_TYPE" = "cmake" ]; then
+  files=$( find . \( -name "CMakeLists.txt" \) )
 else
   echo "Unknown file category: $FILE_TYPE!"
   exit

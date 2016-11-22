@@ -133,6 +133,7 @@ alias trash='mv -t ~/.local/share/Trash/files --backup=t'
 alias gemdir='pushd /var/lib/gems/1.8/gems'
 alias hgrep='history | grep'
 alias ccgrep='bash $HOME/LinuxConf/grep_by_ext.sh cc'
+alias cmkgrep='bash $HOME/LinuxConf/grep_by_ext.sh cmake'
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
