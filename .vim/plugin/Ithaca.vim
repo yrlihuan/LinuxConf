@@ -528,10 +528,10 @@ function! s:UpdateFutureContent()
   if d1['Volume'] == d2['Volume']
     let traded = d2['LastPrice']
   else
-    let buf = bufname('%')
-    if match(buf, 'ru')
+    let buf = bufname(1)
+    if match(buf, 'ru') != -1
       let mult = 10.0
-    elseif match(buf, 'cu')
+    elseif match(buf, 'cu') != -1
       let mult = 10.0
     else
       let mult = 300.0
