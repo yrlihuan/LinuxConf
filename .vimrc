@@ -9,6 +9,22 @@
 " }
 
 " Basics {
+
+    if has("unix")
+      let s:uname = system("uname")
+      if s:uname == "Darwin\n"
+        let g:vimrc_system="mac"
+      elseif s:uname == "Linux\n"
+        let g:vimrc_system="linux"
+      endif
+    else
+      let g:vimrc_system="win"
+    endif
+
+    if g:vimrc_system == "win"
+      set runtimepath=D:\Dropbox\ApplicationData\vimfiles,D:\Dropbox\ApplicationData\vimfiles\after,$VIMRUNTIME
+    endif
+
     set updatetime=250
     set nocompatible " explicitly get out of vi-compatible mode
     set noexrc " don't use local version of .(g)vimrc, .exrc
@@ -30,8 +46,9 @@
     "             |+-- :write updates alternative file name
     "             +-- :read updates alternative file name
     syntax on " syntax highlighting on
-    set fencs=utf-8,gb18030
-
+    set fencs=utf-8,gb18030,utf-16
+    set fenc=utf-8
+    set updatetime=200
     " this enable vim to edit crontab file on mac
     au BufEnter /private/tmp/crontab.* setl backupcopy=yes
 " }
@@ -39,6 +56,7 @@
 " General {
     filetype plugin indent on " load filetype plugins/indent settings
     set backspace=indent,eol,start " make backspace a more flexible
+    set bs=2
     " set backup " make backup files
     " set backupdir=~/.vim/backup " where to put backup files
     " set fileformats=unix,dos,mac " support all three, in this order
@@ -119,6 +137,7 @@
     set nowrap " do not wrap line
     set shiftround " when at 3 spaces, and I hit > ... go to 4, not 5
     set smartcase " if there are caps, go case-sensitive
+    set autoindent
     set shiftwidth=2 " auto-indent amount when using cindent,
                       " >>, << and stuff like that
     set softtabstop=2 " when hitting tab or backspace, how many spaces
@@ -156,8 +175,8 @@
         let Tlist_Exist_OnlyWindow = 1 " if you are the last, kill
                                         " yourself
         let Tlist_File_Fold_Auto_Close = 0 " fold closed other trees
-        let Tlist_Sort_Type = "name" " order by
-        let Tlist_Use_Right_Window = 0 " split to the right side
+        let Tlist_Sort_Type = "order" " order by 'name' or 'order'
+        let Tlist_Use_Right_Window = 1 " split to the right side
                                         " of the screen
         let Tlist_WinWidth = 40 " 40 cols wide, so i can (almost always)
                                  " read my functions
@@ -177,35 +196,70 @@
       let g:fuf_coveragefile_globPatterns=['**/*.rb', '**/*.py', '**/*.h', '**/*.cpp', '**/*.cc', '**/*.c', '**/*.hpp']
     " }
 
-    " ctrlp {
-      set runtimepath^=~/.vim/bundle/ctrlp.vim
+    " ClangComplete Settings {
+    if filereadable(".clang_complete")
+      if g:vimrc_system == "mac"
+        let g:clang_library_path="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/"
+      elseif g:vimrc_system == "linux"
+        let g:clang_library_path="/usr/lib/x86_64-linux-gnu/"
+      endif
+
+      let g:clang_complete_auto=0
+      let g:clang_make_default_keymappings=1
+      let g:clang_auto_select=1
+      "let g:clang_snippets = 1
+      "let g:clang_snippets_engine = 'clang_complete'
+
+      inoremap <expr> <buffer> <C-O> ClangCompleteLaunchCompletion()
+
+    else
+      let g:clang_complete_loaded=1
+    endif
+
+    " }
+
+    " SnipMate Settings {
+    "let g:snippets_dir="C:\\Users\\ThinkPad\\Dropbox\\ApplicationData\\vimfiles\\snippets"
+    "imap <C-w> <c-r>=TriggerSnippet()<cr>
     " }
 " }
 
 " Mappings {
     set pastetoggle=<C-i>
-    nnoremap <M-n> :tabnew<CR>
-"   " Insert Moves {
-        imap <C-h> <Left>
+    " cygwin clipboard {
+      vnoremap <silent> <leader>y :call Putclip(visualmode(), 1)<CR>
+      nnoremap <silent> <leader>y :call Putclip('n', 1)<CR>
+    " }
+    " ctags {
+      " nmap <C-[> :ts <C-R>=expand("<cword>")<CR><CR>	
+    " }
+    " TagList {
+      nnoremap <silent> <C-p> :TlistToggle<CR>
+    " }
+    " Insert Moves {
         imap <C-j> <Down>
         imap <C-k> <Up>
+        imap <C-h> <Left>
         imap <C-l> <Right>
         imap <C-e> <End>
         imap <C-a> <Esc>
         imap <C-o> <Esc>o
-"   " }
-"   " Window Control {
+    " }
+    " Window Control {
         nmap - <C-W>-
         nmap = <C-W>+
-"   " }
-"   " Tab Control {
+        nmap > <C-W>>
+        nmap < <C-W><
+    " }
+    " Tab Control {
         nnoremap <C-k> gT
         nnoremap <C-l> gt
-"   " }
-"   " NerdTree Control {
-        nnoremap <C-n> :NERDTreeToggle<CR>
-"   " }
-"   " FuzzyFinder {
+        nnoremap <C-y> :tabnew <CR>
+    " }
+    " NerdTree Control {
+        nnoremap ,nn :NERDTreeToggle<CR>
+    " }
+    " FuzzyFinder {
         nnoremap ,tt :tabf %<CR>:FufFileWithCurrentBufferDir<CR>
         :noremap ,ff :FufFile<CR>
         :noremap ,fz :FufFileWithCurrentBufferDir<CR>
@@ -217,7 +271,7 @@
         :noremap ,fr :FufBookmarkDir<CR>
         :noremap ,fe :FufBookmarkDirAdd<CR>
         :noremap ,fd :FufDir<CR>
-        :noremap ,ft :FufTaggedFile<CR>
+        ":noremap ,ft :FufTaggedFile<CR>
         :noremap ,fg :FufTag<CR>
         :noremap ,f] :FufTag! <C-r>=expand('<cword>')<CR><CR>
         :noremap ,fl :FufLine<CR>
@@ -225,13 +279,17 @@
         :noremap ,fp :FufChangeList<CR>
         :noremap ,fj :FufJumpList<CR>
         :noremap ,fi :FufEditDataFile<CR>
-"        :noremap ,fc :FufRenewCache<CR>
+         :noremap ,fc :FufRenewCache<CR>
         :noremap ,fc :FufCoverageFile<CR>
         :noremap ,fh :FufBufferTag<CR>
-"   " }
+    " }
 " }
 
 " Autocommands {
+    " Python {
+      au BufRead,BufNewFile *.py set shiftwidth=2
+      au BufRead,BufNewFile *.py set softtabstop=2
+    " }
     " Ruby {
         " ruby standard 2 spaces, always
         au BufRead,BufNewFile *.rb,*.rhtml set shiftwidth=2 
@@ -254,13 +312,18 @@
         au BufRead,BufNewFile *.notes set guifont=Consolas:h12
         au BufRead,BufNewFile *.notes set spell
     " }
+    " HTML {
+        au BufRead,BufNewFile *.html set noexpandtab
+        au BufRead,BufNewFile *.html set softtabstop=2
+        au BufRead,BufNewFile *.html set tabstop=2
+    " }
     au BufNewFile,BufRead *.ahk setf ahk 
 " }
 
 " GUI Settings {
 if has("gui_running")
     " Basics {
-        colorscheme darkblue " my color scheme (only works in GUI)
+        colorscheme desert " my color scheme (only works in GUI)
         set columns=180 " perfect size for me
         set guifont=Courier\ New:h15 " My favorite font
         set guioptions=ce 
@@ -269,7 +332,8 @@ if has("gui_running")
         "              +  use GUI tabs, not console style tabs
         set lines=55 " perfect size for me
         set mousehide " hide the mouse cursor when typing
-        set mouse=
+        set mouse=a
+        set guioptions+=m
     " }
 
     " Font Switching Binds {
@@ -280,4 +344,11 @@ if has("gui_running")
         map <F12> <ESC>:set guifont=Consolas:h20<CR>
     " }
 endif
+" }
+
+" Project Settings {
+if filereadable(".vimrc_")
+  source .vimrc_
+endif
+
 " }
