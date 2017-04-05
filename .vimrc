@@ -193,7 +193,7 @@
     " }
 
     " jedi-vim Settings {
-        let g:jedi#completions_command = "<C-N>"
+        "let g:jedi#completions_command = "<C-N>"
     " }
 
     " FuzzyFinder Settings {

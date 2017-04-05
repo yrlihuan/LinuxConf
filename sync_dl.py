@@ -14,4 +14,3 @@ if len(sys.argv) < 2:
 hostname = sys.argv[1]
 run('ssh -q %s exit' % hostname)
 run("rsync -avz --exclude='*batch*ckpt' --include='*.ckpt' --include='*.pkl' --exclude='*' %s:~/notebooks/* ~/notebooks/checkpoints" % hostname)
-#run("rsync -avz --include='requirements.txt' --exclude='*' ~/notebooks/* %s:~/notebooks" % hostname)
