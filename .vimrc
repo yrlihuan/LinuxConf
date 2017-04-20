@@ -192,6 +192,10 @@
         " }
     " }
 
+    " jedi-vim Settings {
+        "let g:jedi#completions_command = "<C-N>"
+    " }
+
     " FuzzyFinder Settings {
       let g:fuf_coveragefile_globPatterns=['**/*.rb', '**/*.py', '**/*.h', '**/*.cpp', '**/*.cc', '**/*.c', '**/*.hpp']
     " }
