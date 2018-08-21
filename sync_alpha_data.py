@@ -15,6 +15,7 @@ hostname = 'kernel-%s.algo-trading.rocks' % sys.argv[1]
 hostalias = sys.argv[1]
 run('nc -z %s 22' % hostname)
 run("ssh huan@%s 'mkdir -p alpha/build/out/bin && mkdir -p alpha/build/out/lib' && mkdir -p configs" % hostalias)
+run("rsync -avz ~/LinuxConf huan@%s:~" % hostalias)
 run("rsync -avz --include='*' ~/configs/* huan@%s:~/configs" % hostalias)
 #run("rsync -avz --exclude='.git/*' --exclude='stock_minute_ct' --include='*' ~/alphadata/*  huan@%s:~/alphadata" % hostalias)
 run("rsync -avz --exclude='.git/*' --include='*' ~/alphadata/txt_market_extracted  huan@%s:~/alphadata" % hostalias)

@@ -260,6 +260,9 @@
         nnoremap <C-l> gt
         nnoremap <C-y> :tabnew <CR>
     " }
+    " Tagbar {
+        nmap <F4> :TagbarToggle<CR>
+    " }
     " NerdTree Control {
         nnoremap ,nn :NERDTreeToggle<CR>
     " }
