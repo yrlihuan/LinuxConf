@@ -615,5 +615,5 @@ function ToggleLevel2DataWindow()
   endif
 endfunction
 
-nnoremap <F4> :call ToggleLevel2DataWindow()<CR>
+"nnoremap <F4> :call ToggleLevel2DataWindow()<CR>
 
