@@ -133,6 +133,7 @@ alias trash='mv -t ~/.local/share/Trash/files --backup=t'
 alias gemdir='pushd /var/lib/gems/1.8/gems'
 alias hgrep='history | grep'
 alias ccgrep='bash $HOME/LinuxConf/grep_by_ext.sh cc'
+alias pygrep='bash $HOME/LinuxConf/grep_by_ext.sh py'
 alias cmkgrep='bash $HOME/LinuxConf/grep_by_ext.sh cmake'
 alias ss='python /home/huan/alpha/scripts/sync.py all'
 
@@ -151,4 +152,4 @@ export HISTFILESIZE=1000000              # big big history
 shopt -s histappend                      # append to history, don't overwrite it
 
 # Save and reload the history after each command finishes
-#export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
