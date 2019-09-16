@@ -136,6 +136,7 @@ alias ccgrep='bash $HOME/LinuxConf/grep_by_ext.sh cc'
 alias pygrep='bash $HOME/LinuxConf/grep_by_ext.sh py'
 alias cmkgrep='bash $HOME/LinuxConf/grep_by_ext.sh cmake'
 alias ss='python /home/huan/alpha/scripts/sync.py all'
+alias proxy='eval $PROXY'
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -145,6 +146,7 @@ if [ -f /etc/bash_completion ]; then
 fi
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+PATH=$HOME/.local/bin:$HOME/.bazel/bin:$PATH
 
 export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
 export HISTSIZE=100000                   # big big history
@@ -153,3 +155,5 @@ shopt -s histappend                      # append to history, don't overwrite it
 
 # Save and reload the history after each command finishes
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
+export PROXY='http_proxy="http://127.0.0.1:8080" https_proxy="http://127.0.0.1:8080" '

@@ -1,3 +1,4 @@
 .netrwhist
 *.pyc
 backup_mongo.sh
+installation*
