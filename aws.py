@@ -9,6 +9,8 @@ import time
 
 import boto3
 
+import wxpusher
+
 def list_instances(only_running=True):
   client = boto3.client('ec2')
   data = client.describe_instances()
@@ -116,7 +118,7 @@ def main_auto_restart(args):
 
     loss_rate = ping_test(instance_ip, 100)
     if loss_rate > args.relaunch_threshold:
-      logger.info('Try to re-launch instance!')
+      logger.warning('Try to re-launch instance! (Loss rate: %.3f)' % loss_rate)
       terminate_instance(instance_id)
 
       wait_cnt = 0
@@ -128,16 +130,18 @@ def main_auto_restart(args):
           break
 
       if wait_cnt < 120:
-        logger.info('Instance successfully terminated.')
+        logger.warning('Instance successfully terminated.')
       else:
         logger.error('Failed to terminate instance!')
         sys.exit(-1)
     else:
+      if loss_rate > 0.0:
+        logger.warning('Ping test loss rate: %.3f' % loss_rate)
       logger.info('Instance ping test passed.')
 
   info = list_instances(only_running=True)
   if len(info) == 0:
-    logger.info('Start launching instace.')
+    logger.warning('Start launching instace.')
     create_instance(args.launch_template)
 
     wait_cnt = 0
@@ -153,7 +157,7 @@ def main_auto_restart(args):
         break
 
     if wait_cnt < 60:
-      logger.info('Instance successfully launched.')
+      logger.warning('Instance successfully launched.')
       time.sleep(60)
       logger.info('Wait for 60 seconds for instance to be setup by aws.')
     else:
@@ -167,12 +171,14 @@ def main_auto_restart(args):
   start_proxy(instance_ip)
 
 if __name__ == '__main__':
-  logging.basicConfig(format='[%(asctime)s] %(message)s')
+  logging_format = '[%(asctime)s] %(message)s'
+  logging.basicConfig(format=logging_format)
   logger = logging.getLogger('console')
   logger.setLevel(logging.DEBUG)
 
   parser = argparse.ArgumentParser()
   parser.add_argument('--launch_template', default='lt-09c2384f8a0ad2a96')
+  parser.add_argument('--enable_wx', default=False, action='store_true')
 
   subparsers = parser.add_subparsers()
 
@@ -195,4 +201,8 @@ if __name__ == '__main__':
   parser_standalone.set_defaults(func=main_standalone)
 
   args = parser.parse_args()
+
+  if args.enable_wx:
+    wxpusher.install_logging_handler(logger, lvl=logging.WARNING, fmt=logging_format)
+
   args.func(args)

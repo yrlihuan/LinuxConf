@@ -1,5 +1,6 @@
 .netrwhist
 *.pyc
 .*swp
+configs
 backup_mongo.sh
 installation*
