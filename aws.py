@@ -58,12 +58,14 @@ def try_ssh_login(ip, remote_user='ubuntu', ssh_key='/home/huan/.ssh/yrlihuan06.
   return os.system(cmd) == 0
 
 def start_proxy(ip, remote_user='ubuntu', ssh_key='/home/huan/.ssh/yrlihuan06.pem', remote_port=8022, local_port=1887):
-  ssh_options = '-i {} -o "StrictHostKeyChecking=no"'.format(ssh_key)
+  ssh_options = '-o "StrictHostKeyChecking=no"'
+  if ssh_key:
+    ssh_options += ' -i {}'.format(ssh_key)
 
   cmds = []
   # shutdown ssh forwarding in local machine.
   cmds += [
-    'bash -c "ps aux | grep \'ssh.*fNL\' | grep -v grep | awk \'{print \$2}\' | xargs -r kill"',
+    'bash -c "ps aux | grep \'ssh.*fNL.*0.0.0.0:{local_port}\' | grep -v grep | awk \'{{print \$2}}\' | xargs -r kill"'.format(local_port=local_port),
   ]
 
   # check if shadowsocks exists in remote. install it if not.
@@ -104,8 +106,8 @@ def main_info(args):
     instance_id, launch_time, ip, state = info
     logger.info('%s, %s, %s, %s', instance_id, launch_time, ip, state)
 
-def main_setup(args):
-  start_proxy(args.host, args.user, args.key)
+def main_standalone(args):
+  start_proxy(ip=args.host, remote_user=args.user, ssh_key=args.key, remote_port=args.remote_port, local_port=args.local_port)
 
 def main_auto_restart(args):
   info = list_instances(only_running=False)
@@ -183,12 +185,14 @@ if __name__ == '__main__':
   parser_auto_restart.add_argument('--relaunch_threshold', type=float, default=0.2)
   parser_auto_restart.set_defaults(func=main_auto_restart)
 
-  # setup proxy on given user@host with specified key.
-  parser_setup = subparsers.add_parser('setup')
-  parser_setup.add_argument('--host', required=True)
-  parser_setup.add_argument('--user', required=True)
-  parser_setup.add_argument('--key', required=True)
-  parser_setup.set_defaults(func=main_setup)
+  # setup proxy on a standalone server (e.g., aliyun server).
+  parser_standalone = subparsers.add_parser('standalone')
+  parser_standalone.add_argument('--host', required=True)
+  parser_standalone.add_argument('--user', required=True)
+  parser_standalone.add_argument('--key', required=True)
+  parser_standalone.add_argument('--remote_port', type=int, default=8022)
+  parser_standalone.add_argument('--local_port', type=int, default=1887)
+  parser_standalone.set_defaults(func=main_standalone)
 
   args = parser.parse_args()
   args.func(args)
