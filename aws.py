@@ -46,7 +46,7 @@ def terminate_instance(instance_id):
 def ping_test(ip, n=100):
   logger.info('Ping test: %s', ip)
   cmd = 'ping -c {} -i 0.2 -q {} | grep -oP \'\d+(?=% packet loss)\''.format(n, ip)
-  output = subprocess.check_output(['bash', '-c', cmd])
+  output = subprocess.check_output(['bash', '-c', cmd]).decode()
   loss_rate = float(output) / 100.0
   logger.info('Packet loss rate: %.3f.', loss_rate)
 
@@ -80,7 +80,8 @@ def start_proxy(ip, remote_user='ubuntu', ssh_key='/home/huan/.ssh/yrlihuan06.pe
     'remote_port': remote_port,
   }
   check_ssr = "ssh {ssh_options} {remote_login} [[ -f \$HOME/shadowsocksr/README.rst ]] && echo \"yes\" || echo \"no\"".format(**data)
-  if subprocess.check_output(['bash', '-c', check_ssr]).strip() == 'no':
+  logger.info('Checking ssr installation in remote: %s', check_ssr)
+  if subprocess.check_output(['bash', '-c', check_ssr]).strip().decode() == 'no':
     cmds += [
       'ssh {ssh_options} {remote_login} "sudo apt update"'.format(**data),
       'ssh {ssh_options} {remote_login} "sudo apt install -y python"'.format(**data),
