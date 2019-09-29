@@ -109,6 +109,11 @@ def main_info(args):
     instance_id, launch_time, ip, state = info
     logger.info('%s, %s, %s, %s', instance_id, launch_time, ip, state)
 
+def main_ping_test(args):
+  loss_rate = ping_test(args.host, 100)
+  if loss_rate > 0.0:
+    logger.warning('Ping test loss rate (%s): %.3f' % (args.host, loss_rate))
+
 def main_standalone(args):
   start_proxy(ip=args.host, remote_user=args.user, ssh_key=args.key, remote_port=args.remote_port, local_port=args.local_port)
 
@@ -137,7 +142,7 @@ def main_auto_restart(args):
         sys.exit(-1)
     else:
       if loss_rate > 0.0:
-        logger.warning('Ping test loss rate: %.3f' % loss_rate)
+        logger.warning('Ping test loss rate (%s): %.3f' % (instance_ip, loss_rate))
       logger.info('Instance ping test passed.')
 
   info = list_instances(only_running=True)
@@ -186,6 +191,11 @@ if __name__ == '__main__':
   parser_info = subparsers.add_parser('info')
   parser_info.add_argument('--only_running', default=False, action='store_true')
   parser_info.set_defaults(func=main_info)
+
+  # run ping test
+  parser_ping_test = subparsers.add_parser('ping_test')
+  parser_ping_test.add_argument('--host', required=True)
+  parser_ping_test.set_defaults(func=main_ping_test)
 
   # run close/create/setup.
   parser_auto_restart = subparsers.add_parser('auto_restart')
