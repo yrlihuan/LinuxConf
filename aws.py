@@ -114,6 +114,11 @@ def main_ping_test(args):
   if loss_rate > 0.0:
     logger.warning('Ping test loss rate (%s): %.3f' % (args.host, loss_rate))
 
+def main_connect_test(args):
+  cmd = 'nc -z %s %s' % (args.host, args.port)
+  if os.system(cmd) != 0:
+    logger.warning('Ping test failed (%s:%s).' % (args.host, args.port))
+
 def main_standalone(args):
   start_proxy(ip=args.host, remote_user=args.user, ssh_key=args.key, remote_port=args.remote_port, local_port=args.local_port)
 
@@ -196,6 +201,12 @@ if __name__ == '__main__':
   parser_ping_test = subparsers.add_parser('ping_test')
   parser_ping_test.add_argument('--host', required=True)
   parser_ping_test.set_defaults(func=main_ping_test)
+
+  # run nc connect test
+  parser_connect_test = subparsers.add_parser('connect_test')
+  parser_connect_test.add_argument('--host', required=True)
+  parser_connect_test.add_argument('--port', required=True)
+  parser_connect_test.set_defaults(func=main_connect_test)
 
   # run close/create/setup.
   parser_auto_restart = subparsers.add_parser('auto_restart')

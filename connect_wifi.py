@@ -31,6 +31,7 @@ def get_wifi_status():
 def connect(connection):
   # connection needs to be added before running this. command to add connection is:
   #   sudo nmcli dev wifi connect XT1045 password cfb82465
+  #   sudo nmcli dev wifi connect HF213 password 95470884
   outputs = subprocess.check_output(['sudo', 'nmcli', 'connection', 'up', connection])
   outputs = outputs.decode()
   '''
@@ -54,7 +55,7 @@ def disconnect(dev):
 
 if __name__ == '__main__':
   parser = argparse.ArgumentParser()
-  parser.add_argument('--connection', default='XT1045')
+  parser.add_argument('--connection', default='HF213')
 
   args = parser.parse_args()
 
