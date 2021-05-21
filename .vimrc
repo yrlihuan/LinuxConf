@@ -166,6 +166,9 @@
     let b:match_ignorecase = 1 " case is stupid
     let perl_extended_vars=1 " highlight advanced perl vars
                               " inside strings
+    " tabnine {
+        "set rtp+=~/sources/tabnine-vim
+    " }
 
     " TagList Settings {
         let Tlist_Auto_Open=0 " let the tag list open automagically

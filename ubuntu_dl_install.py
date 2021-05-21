@@ -24,12 +24,12 @@ def main(host):
     "ln -s -f LinuxConf/.bashrc",
     "ln -s -f LinuxConf/.env",
     "sudo apt-get install -y ruby",
-    "sudo pip install sklearn",
-    "sudo pip install matplotlib",
-    "sudo pip install seaborn",
-    "sudo pip install plotly",
-    "sudo pip install qgrid",
-    "sudo pip install keras",
+    #"sudo pip install sklearn",
+    #"sudo pip install matplotlib",
+    #"sudo pip install seaborn",
+    #"sudo pip install plotly",
+    #"sudo pip install qgrid",
+    #"sudo pip install keras",
   ]
 
   commands = []
