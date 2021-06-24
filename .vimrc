@@ -259,7 +259,7 @@
         nmap < <C-W><
     " }
     " Tab Control {
-        nnoremap <C-k> gT
+        nnoremap <C-h> gT
         nnoremap <C-l> gt
         nnoremap <C-y> :tabnew <CR>
     " }
